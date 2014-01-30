@@ -1,0 +1,23 @@
+1. check a private key
+> openssl rsa -in MYKEY.key -check
+add -noout to not disclose the key
+
+2. check a Certificate Signing Request
+> openssl req -text -noout -verify -in MYCSR.csr
+
+3. check a certificate
+> openssl x509 -in MYCERT.crt -text -noout
+
+4. check a PKCS#12 keystore
+> openssl pkcs12 -info -in KEYSTORE.p12
+
+5. check a trust chain of a certificate
+> openssl verify -CAfile MYCHAINFILE.pem -verbose MYCERT.crt
+trust chain is in directory (hash format): replace -CAfile with -CApath /path/to/CAchainDir/
+to check for server usage: -purpose sslserver
+to check for client usage: -purpose sslient
+
+6. check if public key matches the private key
+> openssl rsa -in MYKEY.key -modulus -noout | openssl md5; /
+  openssl x509 -in MYCERT.crt -modulus -noout | openssl md5
+This should return the same two md5-hashes

@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<h1>Certificates</h1>
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+<table class="bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Common Name</th>
+            <th>is CA?</th>
+            <th>Not Before</th>
+            <th>Not After</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for certificate in object_list %}
+    <tr>
+        <td><a href="{% url 'certificate_detail' certificate.id %}">
+                {{ certificate.name|escape }}</a>
+            {% if certificate.is_ca %}
+            <span style="float:right"><a href="{% url 'certificate_treelist_instance' certificate.id %}">Children</a></span>
+            {% endif %}
+        </td>
+        <td> {{certificate.subject.common_name|escape }} </td>
+        <td> {{certificate.is_ca|escape }} </td>
+        <td> {{certificate.not_before|date }} </td>
+        <td> {{certificate.not_after|date }} </td>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+
+<a href="{% url "certificate_new" %}">New</a>
+
+{% endblock %}

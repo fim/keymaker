@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/table.css" />
+    {% block script_filter %}{% endblock %}
+    {% block script %}{% endblock %}
+{% endblock head %}
+
+{% block body %}
+    {% block header %}
+        <ul id="menu">
+            <li><a href="#">Home</a></li>
+            <li>
+                <a href="{% url 'certificate_treelist' %}">List</a>
+                <!--
+                <ul>
+                    <li><a href="{% url 'certificate_list' %}">Certificate</a></li>
+                    <li><a href="{% url 'csr_list' %}">CSR</a></li>
+                    <li><a href="{% url 'privatekey_list' %}">Private Key</a></li>
+                </ul>
+                -->
+            </li>
+            <li><a href="{% url 'certificate_new' %}">Create</a>
+                <!--
+                <ul>
+                    <li><a href="{% url 'certificate_new' %}">Certificate</a></li>
+                    <li><a href="{% url 'csr_new' %}">CSR</a></li>
+                    <li><a href="{% url 'privatekey_new' %}">Private Key</a></li>
+                </ul>
+                -->
+            </li>
+            <li><a href="#">Upload</a></li>
+            <li><a href="#">Actions</a>
+                <ul>
+                    <li><a href="#">Mark Expired</a></li>
+                    <li><a href="#">Show Expiring</a></li>
+                    <li><a href="#">Something</a></li>
+                    <li><a href="#">Something Else</a></li>
+                </ul>
+            </li>
+        </ul>
+    {% endblock %}
+    {% block outer_content %}
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<h1>CSRs</h1>
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+<table class="bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Common Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for csr in object_list %}
+    <tr>
+        <td><a href="{% url 'csr_detail' csr.id %}">
+                {{ csr.name|escape }}</a>
+        </td>
+        <td> {{csr.subject.common_name|escape }} </td>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+
+
+<a href="{% url "csr_new" %}">New</a>
+
+{% endblock %}

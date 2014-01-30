@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="thin">
+
+<h1>Private Key Details</h1>
+<table class="bordered">
+<tr><th>Name</th><td>{{ object.name }}</td></tr>
+<tr><th>Bits</th><td>{{ object.bits }}</td></tr>
+<tr><td colspan=2><pre>{{ object.data }}</pre></td></tr>
+</table>
+<a href="{% url "privatekey_list" %}">Back</a>
+</div>
+{% endblock %}

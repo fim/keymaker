@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="thin">
+<h1>Certificate Details</h1>
+<table class="bordered">
+
+<tr><th>Name</th><td>{{ object.name }}</td></tr>
+<tr><th>Is CA</th><td>{{ object.is_ca }}</td></tr>
+<tr><th>Not Before</th><td>{{ object.not_before }}</td></tr>
+<tr><th>Not After</th><td>{{ object.not_after }}</td></tr>
+<tr><th>Singing CA</th><td>{{ object.ca }}</td></tr>
+<tr><th>Country</th><td>{{ object.subject.country }}</td></tr>
+<tr><th>State</th><td>{{ object.subject.state }}</td></tr>
+<tr><th>Locality</th><td>{{ object.subject.locality }}</td></tr>
+<tr><th>Common Name</th><td>{{ object.subject.common_name }}</td></tr>
+<tr><th>Email</th><td>{{ object.subject.email_address }}</td></tr>
+<tr><th>Organization</th><td>{{ object.subject.organization }}</td></tr>
+<tr><th>Organizational Unit</th><td>{{ object.subject.organizational_unit }}</td></tr>
+<tr><td colspan=2><pre>{{ object.data }}</pre></td></tr>
+</table>
+
+<a href="{% url "certificate_list" %}">Back</a>
+</div>
+
+{% endblock %}

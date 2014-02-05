@@ -86,3 +86,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR + '/keymaker/static/'
+
+
+# Custom settings
+DEFAULT_VALIDITY=365

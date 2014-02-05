@@ -9,8 +9,7 @@
     <tr><th>{{ field.label_tag }} </th><td>{{ field }}{{ field.errors }}</td></tr>
     {% endfor %}
     {% for field in certificatesubject_form %}
-    <tr><th>{{ field.label_tag }} </th><td>{{ field }}</td></tr>
-
+    <tr><th>{{ field.label_tag }} </th><td>{{ field }}{{ field.errors }}</td></tr>
     {% endfor %}
     </table>
     <input type="submit" value="Submit" />

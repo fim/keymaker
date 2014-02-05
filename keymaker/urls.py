@@ -5,7 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', RedirectView.as_view(url='/core/certificate/tree',
+    url(r'^$', RedirectView.as_view(url='/core/certificate/list',
         permanent=False)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^core/', include('keymaker.core.urls')),

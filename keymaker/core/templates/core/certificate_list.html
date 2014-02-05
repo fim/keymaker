@@ -24,11 +24,11 @@
 <table class="bordered">
     <thead>
         <tr>
-            <th>Name</th>
             <th>Common Name</th>
             <th>is CA?</th>
             <th>Not Before</th>
             <th>Not After</th>
+            <th>Get</th>
         </tr>
     </thead>
     <tbody>
@@ -37,13 +37,33 @@
         <td><a href="{% url 'certificate_detail' certificate.id %}">
                 {{ certificate.name|escape }}</a>
             {% if certificate.is_ca %}
-            <span style="float:right"><a href="{% url 'certificate_treelist_instance' certificate.id %}">Children</a></span>
+            <span style="float:right"><a href="{% url 'certificate_list' certificate.id %}">Children</a></span>
             {% endif %}
         </td>
-        <td> {{certificate.subject.common_name|escape }} </td>
         <td> {{certificate.is_ca|escape }} </td>
         <td> {{certificate.not_before|date }} </td>
         <td> {{certificate.not_after|date }} </td>
+        <td>
+            <span>
+                <a href="{% url 'certificate_getkey' certificate.id %}">key</a>
+            </span> |
+            <span>
+                <a href="{% url 'certificate_getcrt' certificate.id %}">crt</a>
+            </span> |
+            <span >
+                <a href="{% url 'certificate_getpem' certificate.id %}">pem</a>
+            </span>
+            {% if certificate.signing_ca %} |
+            <span >
+                <a href="{% url 'certificate_getbundle' certificate.id %}">bundle</a>
+            </span>
+            {% endif %}
+            {% if certificate.is_ca %} |
+            <span >
+                <a href="{% url 'certificate_getcrl' certificate.id %}">crl</a>
+            </span>
+            {% endif %}
+        </td>
     {% endfor %}
     </tbody>
 </table>
@@ -66,7 +86,10 @@
     </div>
 {% endif %}
 
-
+{% if certificate %}
+<a href="{% url "certificate_new" certificate.pk %}">New</a>
+{% else %}
 <a href="{% url "certificate_new" %}">New</a>
+{% endif %}
 
 {% endblock %}

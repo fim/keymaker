@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
+{% load core_extras %}
 
 <div class="thin">
 <h1>Certificate Details</h1>
@@ -9,8 +10,9 @@
 <tr><th>Name</th><td>{{ object.name }}</td></tr>
 <tr><th>Is CA</th><td>{{ object.is_ca }}</td></tr>
 <tr><th>Not Before</th><td>{{ object.not_before }}</td></tr>
+<tr><th>Serial</th><td>{{ object.serial|tohexpair }}</td></tr>
 <tr><th>Not After</th><td>{{ object.not_after }}</td></tr>
-<tr><th>Singing CA</th><td>{{ object.ca }}</td></tr>
+<tr><th>Singing CA</th><td>{{ object.signing_ca }}</td></tr>
 <tr><th>Country</th><td>{{ object.subject.country }}</td></tr>
 <tr><th>State</th><td>{{ object.subject.state }}</td></tr>
 <tr><th>Locality</th><td>{{ object.subject.locality }}</td></tr>
@@ -18,6 +20,27 @@
 <tr><th>Email</th><td>{{ object.subject.email_address }}</td></tr>
 <tr><th>Organization</th><td>{{ object.subject.organization }}</td></tr>
 <tr><th>Organizational Unit</th><td>{{ object.subject.organizational_unit }}</td></tr>
+<tr><td colspan=2 style="text-align:center">
+    <span>
+        <a href="{% url 'certificate_getkey' certificate.id %}">Get Key</a>
+    </span> |
+    <span>
+        <a href="{% url 'certificate_getcrt' certificate.id %}">Get Cert</a>
+    </span> |
+    <span >
+        <a href="{% url 'certificate_getpem' certificate.id %}">Get PEM</a>
+    </span>
+    {% if certificate.is_ca %} |
+    <span >
+        <a href="{% url 'certificate_getbundle' certificate.id %}">Get Bundle</a>
+    </span>
+    {% endif %}
+    {% if certificate.is_ca %} |
+    <span >
+        <a href="{% url 'certificate_getcrl' certificate.id %}">Get CRL</a>
+    </span>
+    {% endif %}
+</td></tr>
 <tr><td colspan=2><pre>{{ object.data }}</pre></td></tr>
 </table>
 

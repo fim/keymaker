@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_DIRS = (
-    BASE_DIR  + '/keymaker/templates/'
+    BASE_DIR  + '/keymaker/templates/',
 )
 
 ROOT_URLCONF = 'keymaker.urls'

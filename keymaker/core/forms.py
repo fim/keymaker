@@ -16,6 +16,7 @@ class CSRForm(forms.ModelForm):
 class SubjectForm(forms.ModelForm):
     class Meta:
         model = Subject
+        exclude = []
 
 class CertificateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(), label="Password", required=False)

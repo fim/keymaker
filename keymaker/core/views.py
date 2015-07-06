@@ -107,7 +107,6 @@ class CertificateDetail(DetailView):
 ###
 # Generic Download View
 
-
 class DownloadView(View):
     """
     Generic class view to abstract out the task of serving up files from within Django.
@@ -156,7 +155,7 @@ class DownloadView(View):
         pass
 
     def get(self, request, *args, **kwargs):
-        response = HttpResponse(mimetype=self.get_mimetype())
+        response = HttpResponse(content_type=self.get_mimetype())
         response['Content-Disposition'] = 'attachment; filename=' + self.get_filename()
 
         if self.use_xsendfile is True:
